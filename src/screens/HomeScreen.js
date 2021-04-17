@@ -1,10 +1,27 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { Component } from 'react'
+import { Text, View } from 'react-native'
+import { connect } from 'react-redux';
+import { getAllCoinMarketCap } from '../actios/entities';
+import Loading from '../components/Loading';
 
-const HomeScreen = () => (
-        <View>
-            <Text>Home Screen</Text>
-        </View>
-    )
+class HomeScreen extends Component {
+    state = { };
 
-export default HomeScreen;
+    componentDidMount(){
+        this.props.getAllCoinMarketCap(3);
+    }
+
+    render() {
+        if(this.props.coins.lenght === 0){
+            return <Loading />
+        }
+        return (
+            <View>
+                <Text> Home screen 6 </Text>
+            </View>
+        )
+    }
+}
+
+export default connect(({entities}) => ({coins: entities.coins}), {getAllCoinMarketCap})(HomeScreen);
+

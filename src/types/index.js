@@ -1,0 +1,1 @@
+export { CoinMarketCapData } from './data';
